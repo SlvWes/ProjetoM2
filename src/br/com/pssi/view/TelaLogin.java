@@ -7,6 +7,7 @@ import br.com.pssi.util.SecurityUtil;
 
 import javax.swing.*;
 import java.awt.*;
+import java.net.URL; // IMPORTAÇÃO ADICIONADA PARA O ÍCONE
 
 public class TelaLogin extends JFrame {
     private JTextField txtLogin;
@@ -24,6 +25,19 @@ public class TelaLogin extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
+
+        // --- BLOCO DO ÍCONE ADICIONADO AQUI ---
+        try {
+            URL urlIcone = getClass().getResource("/resources/icone.png");
+            if (urlIcone != null) {
+                setIconImage(new ImageIcon(urlIcone).getImage());
+            } else {
+                System.out.println("Aviso: Arquivo icone.png não encontrado em src/resources/");
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao carregar o ícone: " + e.getMessage());
+        }
+        // --------------------------------------
 
         JPanel painelPrincipal = new JPanel(new GridBagLayout());
         painelPrincipal.setBackground(new Color(24, 24, 27));

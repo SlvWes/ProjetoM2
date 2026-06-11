@@ -8,19 +8,28 @@ import java.util.List;
 public class ProdutoController {
     private final ProdutoDAO produtoDAO = new ProdutoDAO();
 
-    public String cadastrarProduto(String codigo, String nome, String qtdStr, String custoStr, String vendaStr, String cat) {
+    // Adicionado o parâmetro idStr para identificar se é uma atualização ou um novo cadastro
+    public String cadastrarOuAtualizarProduto(String idStr, String codigo, String nome, String qtdStr, String custoStr, String vendaStr, String cat) {
         if (codigo.trim().isEmpty() || nome.trim().isEmpty() || qtdStr.isEmpty() || custoStr.isEmpty() || vendaStr.isEmpty()) {
             return "Erro: Todos os campos são obrigatórios.";
         }
         try {
+            int id = (idStr == null || idStr.trim().isEmpty()) ? 0 : Integer.parseInt(idStr);
             int qtd = Integer.parseInt(qtdStr);
             double custo = Double.parseDouble(custoStr.replace(",", "."));
             double venda = Double.parseDouble(vendaStr.replace(",", "."));
 
             if (qtd < 0 || custo < 0 || venda < 0) return "Erro: Valores não podem ser negativos.";
 
-            produtoDAO.salvar(new Produto(0, codigo, nome, qtd, custo, venda, cat));
-            return "Sucesso: Produto cadastrado com sucesso!";
+            Produto produto = new Produto(id, codigo, nome, qtd, custo, venda, cat);
+
+            if (id > 0) {
+                produtoDAO.atualizar(produto);
+                return "Sucesso: Produto atualizado com sucesso!";
+            } else {
+                produtoDAO.salvar(produto);
+                return "Sucesso: Produto cadastrado com sucesso!";
+            }
         } catch (NumberFormatException e) {
             return "Erro: Formato numérico inválido nos campos de quantidade ou preço.";
         } catch (SQLException e) {
