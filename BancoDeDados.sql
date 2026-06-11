@@ -1,21 +1,19 @@
--- 1. Criação do Banco de Dados (com suporte a acentuação PT-BR)
 CREATE DATABASE IF NOT EXISTS pssi_storage
 CHARACTER SET utf8mb4
 COLLATE utf8mb4_unicode_ci;
 
 USE pssi_storage;
 
--- 2. Tabela de Usuários (Controle de Acesso Administrativo e Operacional)
 CREATE TABLE IF NOT EXISTS usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     login VARCHAR(50) NOT NULL UNIQUE,
-    senha VARCHAR(64) NOT NULL, -- Tamanho fixo de 64 caracteres para armazenar o hash SHA-256
-    perfil VARCHAR(20) NOT NULL, -- Define a hierarquia: 'ADMINISTRADOR' ou 'OPERADOR'
+    senha VARCHAR(64) NOT NULL, 
+    perfil VARCHAR(20) NOT NULL, 
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
--- 3. Tabela de Produtos (Entidade Principal do CRUD de Gestão de Estoque)
+
 CREATE TABLE IF NOT EXISTS produtos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     codigo_barras VARCHAR(50) NOT NULL UNIQUE,
