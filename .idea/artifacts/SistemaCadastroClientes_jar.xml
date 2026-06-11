@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="SistemaCadastroClientes:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/SistemaCadastroClientes_jar</output-path>
+    <root id="archive" name="SistemaCadastroClientes.jar">
+      <element id="module-output" name="SistemaCadastroClientes" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/flatlaf-3.5.1-javadoc.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/mysql-connector-j-9.7.0/mysql-connector-j-9.7.0/mysql-connector-j-9.7.0.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
